@@ -1,17 +1,19 @@
 
 package vue;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import modele.FondInexistant;
 import modele.InstrumentInexistant;
 
 import java.util.Map;
+import java.util.Set;
 import modele.*;
 
 public class Gestionconsole {
     
     private Portefeuille portefeuille;
-    private float pourcentage;
 
     private double fond;
     
@@ -43,7 +45,9 @@ public class Gestionconsole {
         System.out.println("Votre Instru ds map de cle " + cle + " est de " + portefeuille.rechercherfondinstrument(cle));
     }
     
-    
+     public void affiche_recherche_instru_dsMapInstruac_val(String cle, Fonds fond) throws InstrumentInexistant, FondInexistant {
+        System.out.println("Votre fonds ds map de cle " + cle + " est de valeur " + portefeuille.rechercherfondinstrument_avecvaleurfond(cle, fond));
+    }
     
     
     //affichage de l'instrument avant tri
@@ -64,32 +68,63 @@ public class Gestionconsole {
     
    
     
-    
+    //propotion du fond en fonction du nombre totale de fond ds lintru N 
     public float affichefond_statistique(String cle) throws FondInexistant, InstrumentInexistant{
         
+        ArrayList<Instrument> list= new ArrayList<>();
+        list= portefeuille.recherche_instru_avec_clefond(cle); 
         
+        int countFond = 0;
+        int countTotal = 0;
+        float pourcentage;
+        double amount;
+        HashMap<String, Integer> mapOccurence = new HashMap<String, Integer>();
         
-        if (portefeuille.getfondMap().containsKey(cle)){
-            fond=portefeuille.rechercherfond_dsFondsMap(cle);
+        // recuperer tous les instru;ents qui contiennent la clef
+        
+        // iterer sur chaque instruement pour trouver le nombre doccurence du fond
+        // on stock le nbre d occurence dans un hashmap
+        if (!list.isEmpty()) {
             
-            if (portefeuille.getinstrumentMap().containsKey(cle)) {
-        
-        
-                Map<String, Instrument> instrument = portefeuille.getinstrumentMap();
-                Instrument instru = instrument.get(cle);
-                System.out.println(instru.sommefond());
-                pourcentage= (float)((fond) / (instru.sommefond()));
+            for (int i = 0 ; i < list.size() ; i++){
+                
+                for (int j = 0; j < list.get(i).getfondinstruments().size(); j ++){
+                
+                        if (list.get(i).getfondinstruments().get(j).cle==cle){
             
-            }else {
-                    throw new InstrumentInexistant();
-
-                    }
-        
-        }else {
-            portefeuille.rechercherfond_dsFondsMap(cle);
-        }
-//        
+                            countFond ++;
+            
+                            mapOccurence.put(cle, countFond);
+                
+                        }
+                        
+               
+//                     else {
+//                        throw new FondInexistant();
+//                    }
+            
+                }
+            }
+            
+            Set<Map.Entry<String, Integer>> setEntry = mapOccurence.entrySet();
+            for (Map.Entry<String, Integer> entry : setEntry) {
+                
+                countTotal+= entry.getValue();
+            }
+          
+            amount=list.get(0).getfondinstruments().get(0).getAmount();
+            pourcentage= (float)(amount/ countTotal);
+       
         return pourcentage;
+            
+        }
+        
+        else { 
+            
+            throw new InstrumentInexistant();
+        }
+        
+       
     }
     
 }

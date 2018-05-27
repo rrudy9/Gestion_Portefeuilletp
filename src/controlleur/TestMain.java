@@ -14,11 +14,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import modele.*;
 import vue.*;
 
@@ -36,75 +32,89 @@ public class TestMain implements ActionListener, MouseListener{
         
         Scanner sc=new Scanner(System.in);
         //Test pour verifier le fonctionnement du code 
-//        System.out.println("saisir votre cle puis votre valeur ");
-//        String a1,b1,c1;
-//        double a2,b2,c2;
-//        a1=sc.next();
-//        a2=sc.nextDouble();
-//        b1=sc.next();
-//        b2=sc.nextDouble();
-//        c1=sc.next();
-//        c2=sc.nextDouble();
-//        Fonds fond=new Fonds(a1,a2);
-//        Fonds fond2=new Fonds(b1,b2);
-//        Fonds fond3=new Fonds(c1,c2);
-//       
-//        ArrayList <Fonds> instrum=new ArrayList<>();
-//        instrum.add(fond);
-//        instrum.add(fond2);
-//        instrum.add(fond3);
-////        
-//        Map<String, Fonds> fonds=new LinkedHashMap<>();
-//        fonds.put(a1, fond);
-//        fonds.put(b1, fond2);
-////        
-//        Map<String, Instrument> instrument =new LinkedHashMap<>();
-//        instrument.put(a1, new Instrument(a1,instrum));
-////        
-////        
-//        Portefeuille portefeuille=new Portefeuille();
-//        portefeuille.ajouterfond_dsMapfond(a1, a2);
-//        portefeuille.ajouterfond_dsMapfond(b1, b2);
-////        
-//        portefeuille.ajouterfonds_dsMapInstru(a1, fond);
-//        portefeuille.ajouterfonds_dsMapInstru(b1, fond2);
-//        portefeuille.ajouterfonds_dsMapInstru(a1, fond3);
-////
-//        Gestionconsole console=new Gestionconsole(portefeuille);
-////
-//        System.out.println("recherche fond ds portefeuille map fond");
-//        console.affiche_recherche_fond_dsMap(a1);
-////        
-//        System.out.println("recherche fond ds portefeuille map fond");
-//        console.affiche_recherche_fond_dsMap(b1);
-////      
-//        System.out.println("recherche instru ds portefeuille map instru");
-//        console.affiche_recherche_instru_dsMapInstru(a1);
-//        console.affiche_recherche_instru_dsMapInstru(b1);
-////        
-////        
-//        console.afficheinstrudsPortefeuille(a1);
-////
-////        
-//        console.affiche_instru_avant_tri();
-//        console.affiche_instru_apres_tri();
+        System.out.println("saisir votre cle puis votre valeur ");
+        String a1,b1,c1;
+        double a2,b2,c2;
+        a1=sc.next();
+        a2=sc.nextDouble();
+        b1=sc.next();
+        b2=sc.nextDouble();
+        c1=sc.next();
+        c2=sc.nextDouble();
+       
+        Fonds fond=new Fonds(a1,a2);
+        Fonds fond2=new Fonds(b1,b2);
+        Fonds fond3=new Fonds(c1,c2);
+
+        ArrayList <Fonds> instrum=new ArrayList<>();
+        instrum.add(fond);
+        instrum.add(fond2);
+        instrum.add(fond3);
 //        
-//        System.out.println("Statistique");
-//        System.out.println(console.affichefond_statistique(a1));
+        Map<String, Fonds> fonds=new LinkedHashMap<>();
+        fonds.put(a1, fond);
+        fonds.put(b1, fond2);
 //        
-        //Serial serial =new Serial(portefeuille);
-        //System.out.println("1er SERIAL ");
-       // serial.serialiser("premier serial");
+        Map<String, Instrument> instrument =new LinkedHashMap<>();
+        instrument.put(a1, new Instrument(a1,instrum));
+//        
         
-         portefeuille=new Portefeuille();
+        Portefeuille portefeuille=new Portefeuille();
+        portefeuille.ajouterfond_dsMapfond(a1, a2);
+        portefeuille.ajouterfond_dsMapfond(b1, b2);
+//        
+        portefeuille.ajouterfonds_dsMapInstru(a1, fond);
+        portefeuille.ajouterfonds_dsMapInstru(b1, fond2);
+        portefeuille.ajouterfonds_dsMapInstru(a1, fond3);
+        portefeuille.ajouterfonds_dsMapInstru(b1, fond);
+        portefeuille.ajouterfonds_dsMapInstru(c1, fond);
+        portefeuille.ajouterfonds_dsMapInstru(c1, fond3);
+
+
+
+
+//
+        Gestionconsole console=new Gestionconsole(portefeuille);
+//
+        System.out.println("recherche fond ds portefeuille map fond");
+        console.affiche_recherche_fond_dsMap(a1);
+//        
+        System.out.println("recherche fond ds portefeuille map fond");
+        console.affiche_recherche_fond_dsMap(b1);
+
+        System.out.println("recherche instru ds portefeuille map instru");
+        console.affiche_recherche_instru_dsMapInstru(a1);
+        console.affiche_recherche_instru_dsMapInstru(b1);
+        console.affiche_recherche_instru_dsMapInstru(c1);
+        
+        System.out.println("recherche fond particulier");
+        
+        console.affiche_recherche_instru_dsMapInstruac_val(a1, fond3);
+        
+        console.afficheinstrudsPortefeuille(a1);
+//
+//        
+        console.affiche_instru_avant_tri();
+        console.affiche_instru_apres_tri();
+        
+        System.out.println("Statistique");
+        System.out.println(console.affichefond_statistique(a1));
+        
+        //Serial serial =new Serial(portefeuille);
+        System.out.println("1er SERIAL ");
+        //serial.serialiser("premierserial.txt");
+        
+        
+        portefeuille=new Portefeuille();
+        
         //Serial serial1=new Serial(portefeuille1);
         //serial1.deserialiser("premierserial.txt");
-//        
-//        System.out.println("affiche portfeuille 2 apres deserialiser");
-//        Gestionconsole console1=new Gestionconsole(portefeuille1);
-//        console1.affiche_instru_avant_tri();
-//        
-         graphique=new GestionGraphique(portefeuille);
+        
+        System.out.println("affiche portfeuille 2 apres deserialiser");
+        //Gestionconsole console1=new Gestionconsole(portefeuille1);
+        //console1.affiche_instru_avant_tri();
+        
+        // graphique=new GestionGraphique(portefeuille);
         
     }
     
